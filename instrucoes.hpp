@@ -1,6 +1,7 @@
 #ifndef INSTRUCOES_H
 #define INSTRUCOES_H
 #include <map>
+#include <set>
 
 using namespace std;
 
@@ -29,10 +30,12 @@ class dados_instrucao {
 class tabela_instrucoes {
     private:
         map<string, dados_instrucao> tabela_instru;
+        set<string> tabela_pseudo_instru;
     public:
         tabela_instrucoes();
         int get_codigo(string instrucao);
         int get_tamanho(string instrucao);
+        bool pertence_set(string pi);
 };
 
 #endif

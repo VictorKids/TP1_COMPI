@@ -47,6 +47,9 @@
         this->tabela_instru.insert(pair<string, dados_instrucao>("RET"  , d));
         d.set_dados( 16, 1);
         this->tabela_instru.insert(pair<string, dados_instrucao>("HALT" , d));
+
+        this->tabela_pseudo_instru.insert("WORD");
+        this->tabela_pseudo_instru.insert("END");
     }
 
     int tabela_instrucoes::get_codigo(string instrucao){
@@ -57,5 +60,13 @@
     int tabela_instrucoes::get_tamanho(string instrucao){
         dados_instrucao p = this->tabela_instru[instrucao];
         return p.get_tam();
+    }
+
+    bool tabela_instrucoes::pertence_set(string pi){
+        if(this->tabela_pseudo_instru.find(pi) != this->tabela_pseudo_instru.end()){
+            return true;
+        }else{
+            return false;
+        }
     }
 

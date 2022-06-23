@@ -72,20 +72,33 @@ vector<string> separar_string(string linha, string deli){
 }
 
 vector<string> percorrer1(tabela_simbolos *ts, tabela_instrucoes * ti){
-    // objetivo é preencher a tabela de simbolos com labels e psedo-instr
+    // objetivo é preencher a tabela de simbolos com labels e pseudo-instru
     string linha;
     int ilc = 0;
     int ilc_adder = 0;
     vector<string> codigo;
     while(getline(cin, linha)){
-        string linha_sem_comnts = separar_string(linha, ";").front();
-        if(linha_sem_comnts.find(":") != -1){                             // checar se tem label
-            string label = separar_string(linha_sem_comnts, ":").front(); // explode na string
-            if( !(ts->estah_na_tabela(label)) ){                           // se tiver, adiciona-la na tabela onde valor = ilc atual
+        string linha_sem_comnts = separar_string(linha, ";").front();      // remove comentários
+        if(linha_sem_comnts.find(":") != -1){                              // checar se tem label
+
+            string label = separar_string(linha_sem_comnts, ":").front();  // explode na string
+            string instr = separar_string(linha_sem_comnts, ":").back();
+            string operador = separar_string(instr, " ").front();
+            int operando = stoi(separar_string(instr, " ").back());
+
+            if(ti->pertence_set(operador)){                                 // é uma pseudo-instrução ?
+                if(operador == "WORD"){
+                    simbolo s;
+                    s.setvalorlabel(label, operando);
+                    ts->add_na_tabela(s);
+                }else if(operador == "END"){
+                    break;
+                }
+            }else if( !(ts->estah_na_tabela(label)) ){                      // se for uma instrução normal, adiciona label na tabela onde valor = ilc atual
                 simbolo s;
                 s.setvalorlabel(label, ilc);
                 ts->add_na_tabela(s);
-            } // NÃO SEI OQ FAZER SE FOR PSEUDO INSTRUÇÃO
+            }
         }
         string instru = separar_string(separar_string(linha_sem_comnts, ":").back(), " ").front();
         ilc_adder = ti->get_tamanho(instru);
