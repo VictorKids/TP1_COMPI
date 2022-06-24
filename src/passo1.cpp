@@ -21,15 +21,7 @@ int simbolo::get_valor(){
     return this->valor;
 }
 
-tabela_simbolos::tabela_simbolos(){
-    simbolo s;
-    s.setvalorlabel("PC", 0);
-    this->tabela.push_back(s);
-    s.setvalorlabel("AC", 0);
-    this->tabela.push_back(s);
-    s.setvalorlabel("SP", 999);  // ??? n tenho certeza
-    this->tabela.push_back(s);
-}
+tabela_simbolos::tabela_simbolos(){}
 
 void tabela_simbolos::add_na_tabela(simbolo s){
     this->tabela.push_back(s);
