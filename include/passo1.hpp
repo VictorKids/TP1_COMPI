@@ -7,8 +7,6 @@
 #include <iostream>
 //#include <bits/stdc++.h>
 
-using namespace std;
-
     // ***********************************************************
     // *                                                         *
     // * uma classe simples que encapsula dados de um simbolo da *
@@ -18,13 +16,13 @@ using namespace std;
 
 class simbolo {
     private:
-        string label;
+        std::string label;
         int valor;
     public:
-        void set_label(string l);
+        void set_label(std::string l);
         void set_valor(int v);
-        void setvalorlabel(string l, int v);
-        string get_label();
+        void setvalorlabel(std::string l, int v);
+        std::string get_label();
         int get_valor();
 };
 
@@ -37,12 +35,12 @@ class simbolo {
 
 class tabela_simbolos {
     private:
-        vector<simbolo> tabela;
+        std::vector<simbolo> tabela;
     public:
         tabela_simbolos();
         void add_na_tabela(simbolo s);
-        int busca_na_tabela(string str);
-        bool estah_na_tabela(string str);
+        int busca_na_tabela(std::string str);
+        bool estah_na_tabela(std::string str);
 };
 
     // *****************************************************
@@ -52,8 +50,8 @@ class tabela_simbolos {
     // *                                                   *
     // *****************************************************
 
-vector<string> separar_string(string linha, string deli);
+std::vector<std::string> separar_string(std::string linha, char deli);
 
-vector<string> percorrer1(tabela_simbolos *t);
+std::vector<std::string> percorrer1(tabela_simbolos &ts, tabela_instrucoes &ti);
 
 #endif

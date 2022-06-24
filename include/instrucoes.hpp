@@ -3,8 +3,6 @@
 #include <map>
 #include <set>
 
-using namespace std;
-
     // ***********************************************************
     // *                                                         *
     // * uma classe simples que encapsula dados de uma instrução *
@@ -29,13 +27,13 @@ class dados_instrucao {
 
 class tabela_instrucoes {
     private:
-        map<string, dados_instrucao> tabela_instru;
-        set<string> tabela_pseudo_instru;
+        std::map<std::string, dados_instrucao> tabela_instru;
+        std::set<std::string> tabela_pseudo_instru;
     public:
         tabela_instrucoes();
-        int get_codigo(string instrucao);
-        int get_tamanho(string instrucao);
-        bool pertence_set(string pi);
+        int get_codigo(std::string instrucao);
+        int get_tamanho(std::string instrucao);
+        bool pertence_set(std::string pi);
 };
 
 #endif
