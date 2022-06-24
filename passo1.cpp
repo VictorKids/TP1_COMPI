@@ -77,7 +77,9 @@ vector<string> percorrer1(tabela_simbolos *ts, tabela_instrucoes * ti){
     int ilc = 0;
     int ilc_adder = 0;
     vector<string> codigo;
+    bool eh_pseudo;
     while(getline(cin, linha)){
+        eh_pseudo = false;
         string linha_sem_comnts = separar_string(linha, ";").front();      // remove comentários
         if(linha_sem_comnts.find(":") != -1){                              // checar se tem label
 
@@ -87,10 +89,12 @@ vector<string> percorrer1(tabela_simbolos *ts, tabela_instrucoes * ti){
             int operando = stoi(separar_string(instr, " ").back());
 
             if(ti->pertence_set(operador)){                                 // é uma pseudo-instrução ?
+                eh_pseudo = true;
                 if(operador == "WORD"){
-                    simbolo s;
-                    s.setvalorlabel(label, operando);
-                    ts->add_na_tabela(s);
+                    //simbolo s;
+                    //s.setvalorlabel(label, operando);
+                    //ts->add_na_tabela(s);
+                    ilc_adder = 1;  
                 }else if(operador == "END"){
                     break;
                 }
@@ -100,8 +104,10 @@ vector<string> percorrer1(tabela_simbolos *ts, tabela_instrucoes * ti){
                 ts->add_na_tabela(s);
             }
         }
+        if(!eh_pseudo){
         string instru = separar_string(separar_string(linha_sem_comnts, ":").back(), " ").front();
         ilc_adder = ti->get_tamanho(instru);
+        }
         ilc = ilc + ilc_adder;         // ilc += espaço da instrução atual (checar tamanho em instrucoes.cpp)
         codigo.push_back(linha);
     }
